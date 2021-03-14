@@ -1,3 +1,7 @@
+<!-- [![IMAGE ALT TEXT HERE](kluster.png)](https://youtu.be/HoQFPkEzgfQ) -->
+
+<a href="https://youtu.be/HoQFPkEzgfQ"><center><img align="center" width="60%" src="kluster.png"><br></center></a>
+<br>
 ## Setting up three node Kubernetes cluster
 
 First of all, we should have three instances created that can connect over the public network. It doesn't matter how those instances are created, for example, they can either be Digital Ocean `droplets` or `AWS EC2` instances.
@@ -31,7 +35,7 @@ sudo apt-get install -y kubelet kubeadm kubectl
 apt-get install docker.io
 
 # apt-mark hold is used so that these packages will not be updated/removed automatically
-sudo apt-mark hold kubelet kubeadm kubectl 
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 After the above commands are successfully run on all the worker nodes. Below steps can be followed to initialize the Kubernetes cluster.
@@ -65,4 +69,6 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 ### Setting up Kubeconfig file
 
 After successful completion of `kubeadm init` command, like we got the `kubeadm join` command, we would also get details about how we can set up `kubeconfig` file.
+
+
 
