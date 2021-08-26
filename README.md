@@ -10,7 +10,7 @@ First of all, we should have three instances created that can connect over the p
 
 Once you are into those instances, the commands that are mentioned below should be run on all the instances
 
-#### Commands to run on worker nodes
+#### Commands to run on all the nodes
 
 ```
 # update packages and their version
