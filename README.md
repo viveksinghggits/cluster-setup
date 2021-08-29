@@ -1,6 +1,6 @@
 <!-- [![IMAGE ALT TEXT HERE](kluster.png)](https://youtu.be/HoQFPkEzgfQ) -->
 
-<a href="https://youtu.be/HoQFPkEzgfQ"><center><img align="center" width="60%" src="kluster.png"><br></center></a>
+<a href="https://youtu.be/shGDqYenoos"><center><img align="center" width="60%" src="kluster122.png"><br></center></a>
 <br>
 ## Setting up three node Kubernetes cluster
 
@@ -40,7 +40,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 After the above commands are successfully run on all the worker nodes. Below steps can be followed to initialize the Kubernetes cluster.
 
-#### On Leader Node
+### On Leader Node
 
 Run the below command on the node that you want to make the leader node. Please make sure you replace the correct IP of the node with `IP-of-Node`
 
@@ -48,6 +48,30 @@ Run the below command on the node that you want to make the leader node. Please 
 export MASTER_IP=<IP-of-Node>
 kubeadm init --apiserver-advertise-address=${MASTER_IP} --pod-network-cidr=10.244.0.0/16
 ```
+
+### Configure docker's cgroup driver
+
+There are chances that the `kubeadm init` command is going to fail saying the different cgroup drvers are being used in the kubelet (`systemd`) and docker (`cgroupfs`)
+service. To resolve that we will make sure that both the services are running with the same cgroup driver.
+It's recommended that we use `systemd` as cgroup driver for both of the services. To restart docker with `systemd` as cgroup driver, change the
+service file (`/lib/systemd/system/docker.service`) for docker to accept cgroup driver
+
+
+```
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd
+```
+
+and then restart the docker service
+
+```
+# reload unit/config files
+systemctl daemon-reload
+# restart docker service
+systemctl restart docker
+```
+
+You will have to do this on all the other instances as well.
+
 
 #### Join worker nodes to the Leader node
 
