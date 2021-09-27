@@ -13,8 +13,11 @@ Once you are into those instances, the commands that are mentioned below should 
 #### Commands to run on all the nodes
 
 ```
+# get sudo working
+sudo -l 
+
 # update packages and their version
-apt-get update && apt-get upgrade -y
+sudo apt-get update && sudo apt-get upgrade -y
 
 # install curl and apt-transport-https
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
@@ -32,7 +35,7 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 
 # install docker
-apt-get install docker.io
+sudo apt-get install docker.io
 
 # apt-mark hold is used so that these packages will not be updated/removed automatically
 sudo apt-mark hold kubelet kubeadm kubectl
