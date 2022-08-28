@@ -2,6 +2,9 @@
 
 <a href="https://youtu.be/HoQFPkEzgfQ"><center><img align="center" width="60%" src="kluster.png"><br></center></a>
 <br>
+
+> :warning: **This document would not work on Lastest Ubuntu 22.04**: We get into https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/#known-issues
+
 ## Setting up three node Kubernetes cluster
 
 First of all, we should have three instances created that can connect over the public network. It doesn't matter how those instances are created, for example, they can either be Digital Ocean `droplets` or `AWS EC2` instances.
@@ -14,7 +17,7 @@ Once you are into those instances, the commands that are mentioned below should 
 
 ```
 # Get sudo working
-sudo -l 
+sudo -l
 
 # update packages and their version
 sudo apt-get update && sudo apt-get upgrade -y
